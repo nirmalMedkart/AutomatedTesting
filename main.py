@@ -77,17 +77,16 @@ if __name__ == "__main__":
     outputPath = f"C:/Nirmal/Python/AutomatedTesting/output/"
 
     # Read the last entry's ID from output.xlsx
-    last_entry_df = pd.read_excel(r"C:\Nirmal\Python\AutomatedTesting\output\output.xlsx")
+    output_df = pd.read_excel(r"C:\Nirmal\Python\AutomatedTesting\output\output.xlsx")
 
     # Check if the DataFrame is not empty
-    if not last_entry_df.empty:
-        last_entry_id = last_entry_df.iloc[-1]['ID']
+    if not output_df.empty:
+        output_id = output_df.iloc[-1]['ID']
     else:
-        last_entry_id = None
+        output_id = None
+
 
     df = fileToDf(input_path)
-    
-
     
     options = webdriver.ChromeOptions()
     options.add_argument("--headless=new")
@@ -95,11 +94,11 @@ if __name__ == "__main__":
 
 
     for index,row in df.iterrows():
-        if (last_entry_id is None or row['ID'] == last_entry_id):
+        if (output_id is None or row['ID'] == output_id):
             res = pageStatus(driver, row['MAIN_URL'])
             print(f"{res}: {row['MAIN_URL']}")
             storeOutput(outputPath,row['ID'], row['SLUG'], row['CMS URL'], row['MAIN_URL'], res)
-            last_entry_id = None
+            output_id = None
     driver.close()
 
 
