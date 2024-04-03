@@ -8,4 +8,5 @@ input.xlsx
 .exe
 chromedriver.exe
 
-__pycache__
+/__pycache__/
+/venv/
