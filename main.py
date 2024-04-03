@@ -54,11 +54,8 @@ def pageStatus(driver, main_url):
         return response[1]
 
 
-def storeOutput(path, id, slug, cms_url, main_url, res):
+def storeOutput(main_url, res):
     data = {
-        'ID': [id],
-        'SLUG': [slug],
-        'CMS_URL': [cms_url],
         'MAIN_URL': [main_url],
         'RESPONSE': [res]
     }
@@ -97,7 +94,7 @@ if __name__ == "__main__":
         if (output_id is None or row['ID'] == output_id):
             res = pageStatus(driver, row['MAIN_URL'])
             print(f"{res}: {row['MAIN_URL']}")
-            storeOutput(outputPath,row['ID'], row['SLUG'], row['CMS URL'], row['MAIN_URL'], res)
+            storeOutput(row['MAIN_URL'], res)
             output_id = None
     driver.close()
 
